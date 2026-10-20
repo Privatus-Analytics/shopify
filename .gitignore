@@ -1,0 +1,9 @@
+node_modules/
+.shopify/
+.DS_Store
+*.log
+.secrets/
+SUBMISSION.md
+.env
+.env.local
+coverage/

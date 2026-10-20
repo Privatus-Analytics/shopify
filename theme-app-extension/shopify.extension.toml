@@ -1,0 +1,4 @@
+# Privatus Analytics theme app extension (app embed block).
+# Place this folder under your Shopify app's `extensions/` directory and run `shopify app deploy`.
+name = "privatus-analytics"
+type = "theme"
