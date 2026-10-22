@@ -1,0 +1,37 @@
+# Privatus Analytics web pixel: counts Add to Cart, Checkout Started and
+# Purchase, which a theme app embed cannot see (checkout runs outside the
+# theme). Storefront pageviews stay with the app embed, so this pixel never
+# subscribes to page_viewed.
+#
+# The Privatus Analytics app creates the pixel (webPixelCreate) when a site
+# is connected, updates it when the settings change and deletes it when the
+# site is disconnected. Merchants never paste anything.
+type = "web_pixel_extension"
+name = "privatus-analytics-pixel"
+runtime_context = "strict"
+
+# Privatus Analytics sets no cookies and stores no personal data, and this
+# pixel sends no customer data, so it does not wait for a consent decision
+# by default. A merchant who wants it to can switch on "Respect the store's
+# cookie consent" in the app: the pixel then sends only while
+# init.customerPrivacy.analyticsProcessingAllowed is true.
+[customer_privacy]
+analytics = false
+marketing = false
+preferences = false
+sale_of_data = "disabled"
+
+[settings]
+type = "object"
+
+[settings.fields.site_id]
+name = "Site ID"
+description = "The public id of the connected Privatus Analytics site (pa_...). Set by the app."
+type = "single_line_text_field"
+validations = [ { name = "regex", value = "^pa_[A-Za-z0-9]+$" } ]
+
+[settings.fields.respect_consent]
+name = "Respect the store's cookie consent"
+description = "true to send only when the visitor allows analytics. Set by the app, false by default."
+type = "single_line_text_field"
+validations = [ { name = "regex", value = "^(true|false)$" } ]

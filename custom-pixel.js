@@ -1,15 +1,15 @@
-// Privatus Analytics — Shopify Customer Events custom pixel.
-// Paste into Shopify admin → Settings → Customer events → Add custom pixel.
+// Privatus Analytics: Shopify Customer Events custom pixel, for stores that do not install the app.
+// Paste into Shopify admin, Settings, Customer events, Add custom pixel. The app adds its own web pixel instead.
 //
 // Custom pixels run in a strict sandbox where <script> tags can't be loaded, so this pixel sends
 // browser-style hits directly to {API}/api/event (the same endpoint pa.js uses).
 // Privacy: no cookies, no storage writes, no customer data. Only anonymous product attributes and
 // order totals are sent. Checkout/order URLs are reduced to fixed paths so tokens and order ids never leave.
-// MIT License — Copyright (c) 2026 Privatus Analytics
+// MIT License. Copyright (c) 2026 Privatus Analytics
 
 // ---- Configuration ---------------------------------------------------------------------------------
 const SITE_ID = 'pa_XXXX' // your public site id
-const API = 'https://privatusanalytics.com' // change only for a self-hosted instance
+const API = 'https://privatusstats.com' // change only for a self-hosted instance
 // Cookieless analytics generally needs no consent. Set to true to only send when Shopify's customer
 // privacy API reports that analytics processing is allowed (e.g. if your legal team requires it).
 const RESPECT_CONSENT = false

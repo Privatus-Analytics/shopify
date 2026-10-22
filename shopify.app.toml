@@ -1,0 +1,33 @@
+# Privatus Analytics for Shopify: the app configuration for `shopify app deploy`.
+# The app's pages and webhooks are served by privatusanalytics.com (the Rails
+# app, /shopify/*). Fill in client_id after creating the app in the Partner
+# Dashboard (it is the same value as the shopify.api_key credential).
+client_id = "REPLACE_WITH_CLIENT_ID"
+name = "Privatus Analytics"
+application_url = "https://privatusanalytics.com/shopify"
+embedded = true
+
+[access_scopes]
+# read_themes: reading the live theme's settings, to show whether the app
+# embed is on. write_pixels and read_customer_events: creating, updating and
+# deleting the app's own web pixel (extensions/privatus-analytics-pixel).
+scopes = "read_customer_events,read_themes,write_pixels"
+# Our server runs the OAuth install itself (Shopify::OauthController).
+use_legacy_install_flow = true
+
+[auth]
+redirect_urls = [ "https://privatusanalytics.com/shopify/callback" ]
+
+[webhooks]
+api_version = "2026-07"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "https://privatusanalytics.com/shopify/webhooks"
+
+  [[webhooks.subscriptions]]
+  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+  uri = "https://privatusanalytics.com/shopify/webhooks"
+
+[pos]
+embedded = false

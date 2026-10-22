@@ -1,11 +1,19 @@
 {%- comment -%}
   Privatus Analytics app embed: prints the cookieless tracker in <head>.
-  Enable it in Online Store → Themes → Customize → App embeds.
-  Checkout and purchases are tracked by the Customer Events custom pixel (see README).
+  Enable it in Online Store, Themes, Customize, App embeds.
+  Checkout and purchases are counted by the app's web pixel (see README).
 {%- endcomment -%}
 {%- liquid
-  assign site_id = block.settings.site_id | strip
-  assign host = block.settings.script_host | strip | default: 'https://privatusanalytics.com'
+  comment
+    The Privatus Analytics app writes the connected site's id to an
+    app-owned metafield. The Site ID setting is the fallback for a store
+    that pastes its id here instead.
+  endcomment
+  assign site_id = app.metafields.privatus_analytics.site_id.value | strip
+  if site_id == blank
+    assign site_id = block.settings.site_id | strip
+  endif
+  assign host = block.settings.script_host | strip | default: 'https://privatusstats.com'
   unless host contains '://'
     assign host = 'https://' | append: host
   endunless
@@ -66,7 +74,7 @@
       "id": "site_id",
       "label": "Site ID",
       "placeholder": "pa_XXXX",
-      "info": "Your public site id from Privatus Analytics → Site settings → Setup."
+      "info": "Filled in for you when you connect a site in the Privatus Analytics app. Otherwise paste your public site id from Site settings, Setup."
     },
     {
       "type": "select",
@@ -90,7 +98,7 @@
       "type": "text",
       "id": "script_host",
       "label": "Script host",
-      "placeholder": "https://privatusanalytics.com",
+      "placeholder": "https://privatusstats.com",
       "info": "Origin serving /js/pa.js and receiving hits. Keep the default unless you run a self-hosted instance."
     },
     { "type": "text", "id": "domains", "label": "Allowed domains", "placeholder": "shop.com,www.shop.com" },
