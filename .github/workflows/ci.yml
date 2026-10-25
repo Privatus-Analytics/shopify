@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Syntax check the custom pixel
+        run: node --check custom-pixel.js
+      - name: Syntax check the pixel extension
+        working-directory: extensions/privatus-analytics-pixel
+        run: |
+          node --check src/index.js
+          node --check src/hits.js
+      - name: Test the pixel extension
+        working-directory: extensions/privatus-analytics-pixel
+        run: npm test
