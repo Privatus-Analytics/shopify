@@ -1,5 +1,32 @@
 # Privatus Analytics for Shopify
 
+**See how many people visit your Shopify store, and which visits end in a sale. No cookies, no bots.**
+
+You want to know if people visit your store and which visits turn into sales.
+But Google Analytics uses cookies, so in many countries you must show a cookie
+pop-up first (the box that asks visitors to say yes to cookies). Many people
+click no, so they never show up in your numbers. Bots add fake visits on top.
+
+The Privatus Analytics app adds the script to your store theme, and a pixel that
+counts Add to Cart, Checkout Started and Purchase with the order total, on
+checkout too. You paste no code. The script sets no cookies and keeps no IP
+addresses. Bots are filtered out before they are counted.
+
+So you see how many real shoppers came, which pages they looked at, where they
+came from and how many bought, on one simple dashboard. A report comes to your
+inbox each week, and you can set alerts for when traffic jumps or drops. And you
+don't need a cookie pop-up for your analytics.
+
+**Free plan, no card:** 10,000 events a month (an event is a page view or an action you track) on up to 3 sites. [Start free at privatusanalytics.com](https://privatusanalytics.com).
+
+- **No cookies.** No cookies and no hidden IDs on your visitors' devices, and no IP
+  addresses are kept. Laws differ by country, so check your own legal advice.
+- **Real people, not bots.** Known bots, data centers and spam visits are left
+  out on every plan.
+- **Small and fast.** The script is about 3 KB when compressed.
+
+## About this repo
+
 The Privatus Analytics app for Shopify has two extensions. The app installs both, so a merchant pastes nothing:
 
 | Piece | Counts | Where it runs |
